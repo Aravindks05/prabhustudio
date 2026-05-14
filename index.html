@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Prabhu Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#0c0a07;
+    color:white;
+    font-family:'Jost',sans-serif;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:999;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    font-size:32px;
+    color:#d4af37;
+    font-family:'Cormorant Garamond',serif;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#d4af37;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('hero.webp');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.65);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:75px;
+    font-family:'Cormorant Garamond',serif;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:18px;
+    letter-spacing:3px;
+    margin-bottom:30px;
+}
+
+.hero button{
+    padding:15px 40px;
+    border:none;
+    background:#d4af37;
+    color:black;
+    font-weight:600;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.hero button:hover{
+    background:white;
+}
+
+/* SECTION */
+
+section{
+    padding:100px 60px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:50px;
+    font-family:'Cormorant Garamond',serif;
+    color:#d4af37;
+}
+
+.section-title p{
+    color:#aaa;
+    margin-top:10px;
+}
+
+/* SERVICES */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.service-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:12px;
+    min-height:320px;
+    display:flex;
+    align-items:end;
+    padding:30px;
+    background-size:cover;
+    background-position:center;
+    transition:0.4s;
+}
+
+.service-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+}
+
+.service-card:hover{
+    transform:translateY(-10px);
+}
+
+.service-content{
+    position:relative;
+    z-index:2;
+}
+
+.service-card h3{
+    color:#d4af37;
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+.service-card p{
+    line-height:1.7;
+}
+
+/* SERVICE BACKGROUND IMAGES */
+
+.wedding-service{
+    background-image:url('Wed/Wed1.webp');
+}
+
+.candid-service{
+    background-image:url('Can/Can1.webp');
+}
+
+.maternity-service{
+    background-image:url('Baby/Baby1.webp');
+}
+
+.puberty-service{
+    background-image:url('Wed/Wed2.webp');
+}
+
+/* WORKS */
+
+.works-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.work-item{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    border-radius:10px;
+}
+
+.work-item img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.work-item:hover img{
+    transform:scale(1.1);
+}
+
+.work-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:0.4s;
+}
+
+.work-item:hover .work-overlay{
+    opacity:1;
+}
+
+.work-overlay h3{
+    color:white;
+    font-size:30px;
+    font-family:'Cormorant Garamond',serif;
+}
+
+/* GALLERY */
+
+.gallery-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.97);
+    z-index:9999;
+    display:none;
+    overflow-y:auto;
+    padding:50px;
+}
+
+.gallery-popup.active{
+    display:block;
+}
+
+.close-gallery{
+    position:fixed;
+    top:20px;
+    right:30px;
+    font-size:55px;
+    color:white;
+    cursor:pointer;
+}
+
+.gallery-grid{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.gallery-grid img{
+    width:100%;
+    border-radius:10px;
+    transition:0.4s;
+}
+
+.gallery-grid img:hover{
+    transform:scale(1.03);
+}
+
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about img{
+    width:100%;
+    border-radius:10px;
+}
+
+.about-text h2{
+    font-size:50px;
+    color:#d4af37;
+    font-family:'Cormorant Garamond',serif;
+    margin-bottom:20px;
+}
+
+.about-text p{
+    color:#aaa;
+    line-height:1.9;
+}
+
+/* CONTACT */
+
+.contact{
+    text-align:center;
+}
+
+.contact h2{
+    font-size:50px;
+    color:#d4af37;
+    font-family:'Cormorant Garamond',serif;
+    margin-bottom:20px;
+}
+
+.contact p{
+    color:#aaa;
+    margin-bottom:30px;
+}
+
+.contact-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.contact-buttons a{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    text-decoration:none;
+    color:white;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.whatsapp{
+    background:#25d366;
+}
+
+.instagram{
+    background:#e1306c;
+}
+
+.facebook{
+    background:#1877f2;
+}
+
+.contact-buttons a:hover{
+    transform:translateY(-5px);
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    padding:30px;
+    text-align:center;
+    color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    nav{
+        padding:20px;
+        flex-direction:column;
+        gap:20px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    section{
+        padding:80px 20px;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-popup{
+        padding:20px;
+    }
+
+    .contact-buttons{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">Prabhu Studio</div>
+
+    <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#works">Works</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>Every Moment Deserves Forever</h1>
+
+        <p>Wedding Photography & Candid Videography</p>
+
+        <button onclick="document.getElementById('works').scrollIntoView()">
+            View Our Work
+        </button>
+
+    </div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Professional photography services for every special moment.</p>
+    </div>
+
+    <div class="services-grid">
+
+        <div class="service-card wedding-service">
+
+            <div class="service-content">
+                <h3>Wedding Photography</h3>
+                <p>Beautiful wedding photography capturing emotions and rituals.</p>
+            </div>
+
+        </div>
+
+        <div class="service-card candid-service">
+
+            <div class="service-content">
+                <h3>Candid Videography</h3>
+                <p>Cinematic storytelling videos with emotional moments.</p>
+            </div>
+
+        </div>
+
+        <div class="service-card maternity-service">
+
+            <div class="service-content">
+                <h3>Maternity Shoot</h3>
+                <p>Elegant maternity sessions with artistic creativity.</p>
+            </div>
+
+        </div>
+
+        <div class="service-card puberty-service">
+
+            <div class="service-content">
+                <h3>Puberty Shoot</h3>
+                <p>Traditional and stylish puberty ceremony photography.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="about">
+
+        <img src="Main.webp" alt="About">
+
+        <div class="about-text">
+
+            <h2>About Prabhu Studio</h2>
+
+            <p>
+                Prabhu Studio is one of the best wedding photography studios in
+                Ponnamaravathi. We capture emotional, traditional, and cinematic
+                moments beautifully with creative storytelling.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WORKS -->
+
+<section id="works">
+
+    <div class="section-title">
+        <h2>Wedding Photography</h2>
+        <p>Click any image to view gallery.</p>
+    </div>
+
+    <div class="works-grid">
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Wed/Wed1.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Wed/Wed2.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Wed/Wed3.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="works">
+
+    <div class="section-title">
+        <h2>Candid photography</h2>
+        <p>Click to view all candid photos.</p>
+    </div>
+
+    <div class="works-grid">
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Can/Can1.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Can/Can2.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Can/Can3.webp" alt="Wedding">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY POPUP -->
+
+<div class="gallery-popup" id="galleryPopup">
+
+    <span class="close-gallery" onclick="closeGallery()">&times;</span>
+
+    <div class="gallery-grid">
+
+        <img src="Can/Can1.webp">
+        <img src="Can/Can2.webp">
+        <img src="Can/Can3.webp">
+
+    </div>
+
+</div>
+
+<section id="works">
+
+    <div class="section-title">
+        <h2>Baby Shower</h2>
+        <p>Click to view all Baby Shower photos.</p>
+    </div>
+
+    <div class="works-grid">
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Baby/Baby1.webp" alt="Baby Shower">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Baby/Baby2.webp" alt="Baby Shower">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+        <div class="work-item" onclick="openGallery()">
+
+            <img src="Baby/Baby3.webp" alt="Baby Shower">
+
+            <div class="work-overlay">
+                <h3>View Gallery</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY POPUP -->
+
+<div class="gallery-popup" id="galleryPopup">
+
+    <span class="close-gallery" onclick="closeGallery()">&times;</span>
+
+    <div class="gallery-grid">
+
+        <img src="Baby/Baby1.webp">
+        <img src="Baby/Baby2.webp">
+        <img src="Baby/Baby3.webp">
+
+    </div>
+
+</div>
+
+
+<!-- GALLERY -->
+
+<div class="gallery-popup" id="galleryPopup">
+
+    <span class="close-gallery" onclick="closeGallery()">&times;</span>
+
+    <div class="gallery-grid">
+
+        <img src="Wed/Wed1.webp">
+        <img src="Wed/Wed2.webp">
+        <img src="Wed/Wed3.webp">
+
+        <img src="Can/Can1.webp">
+        <img src="Can/Can2.webp">
+        <img src="Can/Can3.webp">
+
+        <img src="Baby/Baby1.webp">
+        <img src="Baby/Baby2.webp">
+        <img src="Baby/Baby3.webp">
+
+    </div>
+
+</div>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <div class="contact">
+
+        <h2>Book Your Session</h2>
+
+        <p>
+            Contact us for weddings, candid shoots, maternity shoots,
+            and all special events.
+        </p>
+
+        <div class="contact-buttons">
+
+            <!-- WHATSAPP -->
+
+            <a class="whatsapp"
+            href="https://wa.me/919787587879"
+            target="_blank">
+
+                <i class="fa-brands fa-whatsapp"></i>
+                WhatsApp
+
+            </a>
+
+            <!-- INSTAGRAM -->
+
+            <a class="instagram"
+            href="https://instagram.com/"
+            target="_blank">
+
+                <i class="fa-brands fa-instagram"></i>
+                Instagram
+
+            </a>
+
+            <!-- FACEBOOK -->
+
+            <a class="facebook"
+            href="https://facebook.com/"
+            target="_blank">
+
+                <i class="fa-brands fa-facebook-f"></i>
+                Facebook
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2025 Prabhu Studio. All Rights Reserved.
+
+</footer>
+
+<script>
+
+function openGallery(){
+
+    document.getElementById('galleryPopup').classList.add('active');
+
+}
+
+function closeGallery(){
+
+    document.getElementById('galleryPopup').classList.remove('active');
+
+}
+
+document.getElementById('galleryPopup').addEventListener('click',function(e){
+
+    if(e.target.id === 'galleryPopup'){
+
+        closeGallery();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
